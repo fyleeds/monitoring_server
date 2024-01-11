@@ -1,9 +1,17 @@
 # On importe la lib argparse
 import argparse
 import sys
-import logging
+import os 
 import time
 import psutil
+
+# Ajouter le chemin vers log_folder à sys.path
+sys.path.append(os.path.abspath('../var/log'))
+
+from logger_config import setup_logger
+# Créer une instance de logger pour ce fichier
+logger = setup_logger()
+
 # Création d'un objet ArgumentParser
 # parser = argparse.ArgumentParser()
 
@@ -32,47 +40,8 @@ import psutil
 #     print("ERROR Le port spécifié est un port privilégié. Spécifiez un port au dessus de 1024.")
 #     sys.exit(2)
 
-class CustomFormatter(logging.Formatter):
-
-    yellow = "\x1b[33;20m"
-    reset = "\x1b[0m"
-
-    FORMATS = {
-        logging.WARNING: yellow + "%(levelname)s %(asctime)s %(message)s" + reset,
-    }
-
-    def format(self, record):
-        log_fmt = self.FORMATS.get(record.levelno)
-        formatter = logging.Formatter(log_fmt)
-        return formatter.format(record)
-
-
-try:
-    # Create a custom logger
-    logger = logging.getLogger("monit_logger")
-    logger.setLevel(logging.DEBUG)  # This needs to be DEBUG to capture all levels of logs
-
-    # Create handlers
-    c_handler = logging.StreamHandler()
-    f_handler = logging.FileHandler('./var/log/monit_log')
-    c_handler.setLevel(logging.DEBUG)  # Set to DEBUG to ensure all levels are logged to console
-    f_handler.setLevel(logging.DEBUG)  # Set to DEBUG to ensure all levels are logged to file
-
-    # Create formatters and add it to handlers
-    formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
-    c_handler.setFormatter(CustomFormatter())
-    f_handler.setFormatter(formatter)
-
-    # Add handlers to the logger
-    logger.addHandler(c_handler)
-    logger.addHandler(f_handler)
-except Exception as e:
-    print(f"Failed to configure logging: {e}")
-    sys.exit(1)
-
-
-
-logger.info("Le programme tourne")
+# Créer une instance de logger pour ce fichier
+logger = setup_logger()
 
 def getCpuTimes():
     return psutil.cpu_times()
@@ -185,6 +154,7 @@ def getLoadAvg():
     return ""
 
 def main():
+
     getCpuTimeUser()
     getCpuTimeSystem()
     getCpuTimeIdle()
@@ -203,4 +173,5 @@ def main():
     
 
 if __name__ == "__main__":
+
     main()
