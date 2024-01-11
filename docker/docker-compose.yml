@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/home/user/whatever/:/var/www/html"
+    environment:
+      - WORDPRESS_DB=wordpress
+      - WORDPRESS_USER=wordpress
+      - WORDPRESS_PASSWORD=wp_is_secure
+  db:
+    image: mysql
+    environment:
+      - DB_NAME=wordpress
+      - DB_USER=wordpress
+      - DB_PASSWORD=wp_is_secure
