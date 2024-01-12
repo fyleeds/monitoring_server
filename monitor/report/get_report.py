@@ -1,47 +1,53 @@
 import sys 
 import os
-import json
-import uuid
-from datetime import datetime,timezone
+from datetime import datetime,timezone,timedelta
 import pytz
-
-# Ajouter le chemin vers log_folder à sys.path
-sys.path.append(os.path.abspath('../measures'))
-
-from CPU import getCpuObject
-# from DISK import getDisksObject
-from RAM import getRamObject
-from TCP import getTcpObject
 
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger("get_report_logger")
 
-id_str = str(uuid.uuid4())
-date_str = datetime.now( pytz.timezone('Europe/Paris')).strftime("%d-%m-%Y_%H-%M-%S")
+path = "../../var/monit"
+tz= pytz.timezone('Europe/Paris')
+date =  datetime.now(tz)
 
-def createJsonObject():
+def getListReportsLog():
+    list_reports = [file.name for file in os.scandir(path)]
+    logger.info(list_reports)
 
-    return {
-        "id": id_str,
-        "timestamp": date_str,
-        "cpu": getCpuObject(),
-        "ram": getRamObject(),
-        "tcp": getTcpObject(),
-    }
-    # "disk": getDisksObject()
+def getListReports():
+    list_reports = [file.name for file in os.scandir(path)]
+    return list_reports
 
-def createJsonFile():
-    reportname = "report_"+ id_str +"_" + date_str + ".json"
-    reportpath = "../../var/monit/" + reportname
-    
-    with open(reportpath, 'w') as outfile:
-        json.dump(createJsonObject(), outfile)
-    logger.info("Json file created at %s",reportpath)
+def getListReportsLastHours(hours):
+    list_reports = []
+    date_wanted = date - timedelta(hours=hours)
+    for report_name in getListReports():
+        if getDateTimeReport(report_name) > date_wanted:
+            logger.info(report_name)
+            logger.info("Report is in the time range")
+            list_reports.append(report_name)
+    return list_reports
+
+def getDateTimeReport(report_name):
+    date_report = tz.localize(datetime.strptime(" ".join(report_name.split(".")[0].split("_")[len(report_name.split(".")[0].split("_"))-2:]), "%d-%m-%Y %H-%M-%S"))
+    return date_report
+  
+def getLastReport():
+    list_reports = []
+    # datetime most_recent_date 
+    # for report_name in getListReports():
+    #     getLastDateTimeReport(getDateTimeReport(report_name)
+    #     if date1 > date2:
+    #         return date1
+    #     else:
+    #         return date2
+
+
+    #     logger.info(list)
 
 def main():
-    createJsonFile()
-
+    getLastReport()
 if __name__ == "__main__":
     main()
