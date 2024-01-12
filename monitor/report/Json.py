@@ -9,7 +9,8 @@ from DISK import createDiskObject
 from RAM import createRamObject
 from TCP import createTcpObject
 
-sys.path.append(os.path.abspath('../var/log'))
+sys.path.append(os.path.abspath('../log'))
+from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger()
 
@@ -29,6 +30,6 @@ def createJsonFile():
 
 def main():
     createJsonFile()
-    
+
 if __name__ == "__main__":
     main()

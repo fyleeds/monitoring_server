@@ -5,9 +5,7 @@ import os
 import time
 import psutil
 
-# Ajouter le chemin vers log_folder à sys.path
-sys.path.append(os.path.abspath('../var/log'))
-
+sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger()
