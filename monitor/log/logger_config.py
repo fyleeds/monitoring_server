@@ -24,7 +24,7 @@ def setup_logger():
 
         # Create handlers
         c_handler = logging.StreamHandler()
-        f_handler = logging.FileHandler('./var/log/monit_log')
+        f_handler = logging.FileHandler('../var/log/monit_log')
         c_handler.setLevel(logging.DEBUG)  # Set to DEBUG to ensure all levels are logged to console
         f_handler.setLevel(logging.DEBUG)  # Set to DEBUG to ensure all levels are logged to file
 
