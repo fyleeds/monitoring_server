@@ -8,7 +8,7 @@ import psutil
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
-logger = setup_logger()
+logger = setup_logger("cpu_logger")
 
 # Création d'un objet ArgumentParser
 # parser = argparse.ArgumentParser()
@@ -38,8 +38,6 @@ logger = setup_logger()
 #     print("ERROR Le port spécifié est un port privilégié. Spécifiez un port au dessus de 1024.")
 #     sys.exit(2)
 
-# Créer une instance de logger pour ce fichier
-logger = setup_logger()
 
 def getCpuTimes():
     return psutil.cpu_times()

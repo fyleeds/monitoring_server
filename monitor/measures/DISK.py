@@ -8,7 +8,7 @@ import psutil
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
-logger = setup_logger()
+logger = setup_logger("disk_logger")
 
 def getDisksPartitionsInternal():
     return psutil.disk_partitions(all=False)

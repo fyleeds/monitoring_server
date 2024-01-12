@@ -16,10 +16,10 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
-def setup_logger():
+def setup_logger(name):
     try:
         # Create a custom logger
-        logger = logging.getLogger("monit_logger")
+        logger = logging.getLogger(name)
         logger.setLevel(logging.DEBUG)  # This needs to be DEBUG to capture all levels of logs
 
         # Create handlers
