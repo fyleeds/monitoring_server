@@ -24,11 +24,11 @@ def getPortConnections():
     logger.info(port_opened_str)
     return port_opened_str
 
-def getPortConnections():
+def getPortConnectionsValue():
     return getStatusConnections().port
 
 # Create a JSON object with TCP connections stats
 def getTcpObject():
     return {
-        "ports": getPortConnections()
+        "ports": getPortConnectionsValue()
     }
