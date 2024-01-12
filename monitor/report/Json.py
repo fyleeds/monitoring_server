@@ -23,7 +23,7 @@ def createJsonObject():
     }
 
 def createJsonFile():
-    with open('../var/monit/report.json', 'w') as outfile:
+    with open('../../var/monit/report.json', 'w') as outfile:
         logger.info("Creating json file %s",createJsonObject())
         json.dump(createJsonObject(), outfile)
     logger.info("Json file created")
