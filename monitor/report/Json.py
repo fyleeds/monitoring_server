@@ -4,10 +4,10 @@ import json
 # Ajouter le chemin vers log_folder à sys.path
 sys.path.append(os.path.abspath('../measures'))
 
-from CPU import createCpuObject
-from DISK import createDisksObject
-from RAM import createRamObject
-from TCP import createTcpObject
+from CPU import getCpuObject
+from DISK import getDisksObject
+from RAM import getRamObject
+from TCP import getTcpObject
 
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
@@ -16,10 +16,10 @@ logger = setup_logger()
 
 def createJsonObject():
     return {
-        "cpu": createCpuObject(),
-        "disk": createDisksObject(),
-        "ram": createRamObject(),
-        "tcp": createTcpObject()
+        "cpu": getCpuObject(),
+        "disk": getDisksObject(),
+        "ram": getRamObject(),
+        "tcp": getTcpObject()
     }
 
 def createJsonFile():

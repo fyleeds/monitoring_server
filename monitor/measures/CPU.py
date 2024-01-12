@@ -179,7 +179,7 @@ def getCpusFreqValue():
     return psutil.cpu_freq(percpu=True)
 
 # Create a JSON object with CPU stats
-def createCpuObject():
+def getCpuObject():
     return {
         "cpuTimeUser": getCpuTimeUserValue(),
         "cpuTimeSystem": getCpuTimeSystemValue(),

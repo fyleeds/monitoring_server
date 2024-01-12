@@ -28,7 +28,7 @@ def getPortConnections():
     return getStatusConnections().port
 
 # Create a JSON object with TCP connections stats
-def createTcpObject():
+def getTcpObject():
     return {
         "ports": getPortConnections()
     }
