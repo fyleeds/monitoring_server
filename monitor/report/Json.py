@@ -5,7 +5,7 @@ import json
 sys.path.append(os.path.abspath('../measures'))
 
 from CPU import createCpuObject
-from DISK import createDiskObject
+from DISK import createDisksObject
 from RAM import createRamObject
 from TCP import createTcpObject
 
@@ -17,7 +17,7 @@ logger = setup_logger()
 def createJsonObject():
     return {
         "cpu": createCpuObject(),
-        "disk": createDiskObject(),
+        "disk": createDisksObject(),
         "ram": createRamObject(),
         "tcp": createTcpObject()
     }
