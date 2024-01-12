@@ -26,3 +26,9 @@ def createJsonFile():
         logger.info("Creating json file %s",createJsonObject())
         json.dump(createJsonObject(), outfile)
     logger.info("Json file created")
+
+def main():
+    createJsonFile()
+    
+if __name__ == "__main__":
+    main()
