@@ -10,7 +10,6 @@ logger = setup_logger("cpu_logger")
 
 
 def getLoadsAvg():
-    logger.debug("getLoadsAvg")
     load_avg = [x / psutil.cpu_count() * 100 for x in psutil.getloadavg()]
     return {"1min": load_avg[0], "5min": load_avg[1], "15min": load_avg[2]}
 

@@ -53,7 +53,7 @@ def logReport(report_name):
     with open(path+"/"+report_name) as report:
         logger.info("Checking %s : %s",report_name,report.read())
 
-def getLastReport():
+def getLastReportName():
     date2 = datetime(1970,1,1,0,0,0,0,tzinfo=tz)
     for report_name in getListReports():
         date1 = getDateTimeReport(report_name)
@@ -62,8 +62,11 @@ def getLastReport():
     # logReport(most_recent_report)
     return most_recent_report
 
-def main():
-    getReportCpuInfos(getLastReport())
+def logLastReport():
+    logReport(getLastReportName())
     
-if __name__ == "__main__":
-    main()
+# def main():
+
+
+# if __name__ == "__main__":
+#     main()
