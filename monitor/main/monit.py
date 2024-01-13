@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.abspath('../report'))
 
 from get_report import logLastReport, logListReports, logLastReportAverage
-
+from create_report import createReportAverage
 # sys.path.append(os.path.abspath('../log'))
 # from logger_config import setup_logger
 
@@ -13,7 +13,8 @@ from get_report import logLastReport, logListReports, logLastReportAverage
 def main():
     # logLastReport()
     # logListReports()
-    logLastReportAverage()
+    createReportAverage(1)
+    # logLastReportAverage()
     
     
 

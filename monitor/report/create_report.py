@@ -32,25 +32,20 @@ def createReportObject(cpu,ram,tcp):
     }
     # "disk": getDisksObject()
 
-def createReport(cpu,ram,tcp,is_average=False):
-    if is_average:
-        reportname = "report_average_" + id_str +"_" + date_str + ".json"
-        reportpath = "../../var/monit/reports_average/" + reportname
-    else:
-        reportname = "report_"+ id_str +"_" + date_str + ".json"
-        reportpath = "../../var/monit/reports/" + reportname
-        
+def createReport(cpu,ram,tcp):
+    reportname = "report_"+ id_str +"_" + date_str + ".json"
+    reportpath = "../../var/monit/reports/" + reportname   
     with open(reportpath, 'w') as outfile:
         json.dump(createReportObject(cpu,ram,tcp), outfile)
-        
-    if is_average:
-        logger.info("Average report file created at %s",reportpath)
-    else:
-        logger.info("Report file created at %s",reportpath)
+    logger.info("Report file created at %s",reportpath)
 
 def createReportAverage(hours):
+    reportname = "report_average_" + id_str +"_" + date_str + ".json"
+    reportpath = "../../var/monit/reports_average/" + reportname
     cpu,ram,tcp= getAverageReport(hours)
-    return createReport(cpu,ram,tcp,True)
+    with open(reportpath, 'w') as outfile:
+        json.dump(createReportObject(cpu,ram,tcp), outfile)
+    logger.info("Average report file created at %s",reportpath)
     
 
 # def main():
