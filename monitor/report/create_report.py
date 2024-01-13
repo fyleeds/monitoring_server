@@ -53,8 +53,9 @@ def createReportAverage(hours):
     return createReport(cpu,ram,tcp,True)
     
 
-def main():
-    createReport(getCpuObject(),getRamObject(),getTcpObject(),False)
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     # createReport(getCpuObject(),getRamObject(),getTcpObject(),False)
+#     # createReportAverage(1)
+    
+# if __name__ == "__main__":
+#     main()

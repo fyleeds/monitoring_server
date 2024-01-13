@@ -9,17 +9,21 @@ from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger("get_report_logger")
 
-path = "../../var/monit/reports"
+path_reports = "../../var/monit/reports"
+path_reports_average = "../../var/monit/reports_average"
+
 tz= pytz.timezone('Europe/Paris')
 date =  datetime.now(tz)
 
-def getListReportsLog():
-    list_reports = [file.name for file in os.scandir(path)]
-    logger.info(list_reports)
+def logListReports():
+    logger.info([file.name for file in os.scandir(path_reports)])
 
 def getListReports():
-    list_reports = [file.name for file in os.scandir(path)]
+    list_reports = [file.name for file in os.scandir(path_reports)]
     return list_reports
+
+def getListReportsAverage():
+    return [file.name for file in os.scandir(path_reports_average)]
 
 def getListReportsLastHours(hours):
     list_reports = []
@@ -43,14 +47,18 @@ def getReportCpuInfos(report_name):
     return report["cpu"].items()
 
 def getReportAsStr(report_name):
-    with open(path+"/"+report_name) as report:
+    with open(path_reports+"/"+report_name) as report:
         return report.read()
     
 def getReportAsDict(report_name):
     return json.loads(getReportAsStr(report_name))
 
 def logReport(report_name):
-    with open(path+"/"+report_name) as report:
+    with open(path_reports+"/"+report_name) as report:
+        logger.info("Checking %s : %s",report_name,report.read())
+
+def logReportAverage(report_name):
+    with open(path_reports_average+"/"+report_name) as report:
         logger.info("Checking %s : %s",report_name,report.read())
 
 def getLastReportName():
@@ -62,9 +70,21 @@ def getLastReportName():
     # logReport(most_recent_report)
     return most_recent_report
 
+def getLastReportAverageName():
+    date2 = datetime(1970,1,1,0,0,0,0,tzinfo=tz)
+    for report_name in getListReportsAverage():
+        date1 = getDateTimeReport(report_name)
+        if (date1 > date2):
+            most_recent_report = report_name
+    # logReport(most_recent_report)
+    return most_recent_report
+
 def logLastReport():
     logReport(getLastReportName())
     
+def logLastReportAverage():
+    logReportAverage(getLastReportAverageName())
+
 # def main():
 
 
