@@ -1,6 +1,6 @@
 import sys 
 import os
-from datetime import datetime,timezone,timedelta
+from datetime import datetime,timedelta
 import pytz
 import json
 
@@ -34,20 +34,20 @@ def getDateTimeReport(report_name):
     return date_report
 
 def getReportRamInfos(report_name):
-    report = openReportAsDict(report_name)
+    report = getReportAsDict(report_name)
     return report["ram"].items()
 
 def getReportCpuInfos(report_name):
-    report = openReportAsDict(report_name)
+    report = getReportAsDict(report_name)
     # logger.info(report["cpu"].items())
     return report["cpu"].items()
 
-def openReportAsStr(report_name):
+def getReportAsStr(report_name):
     with open(path+"/"+report_name) as report:
         return report.read()
     
-def openReportAsDict(report_name):
-    return json.loads(openReportAsStr(report_name))
+def getReportAsDict(report_name):
+    return json.loads(getReportAsStr(report_name))
 
 def logReport(report_name):
     with open(path+"/"+report_name) as report:

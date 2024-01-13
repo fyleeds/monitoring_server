@@ -2,7 +2,7 @@ import sys
 import os
 import json
 import uuid
-from datetime import datetime,timezone
+from datetime import datetime
 import pytz
 from compute_report import getAverageReport
 # Ajouter le chemin vers log_folder à sys.path
