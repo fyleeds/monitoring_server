@@ -37,18 +37,10 @@ def getReportRamInfos(report_name):
     report = openReportAsDict(report_name)
     return report["ram"].items()
 
-def getReportRamInfos(report_name):
-    report = openReportAsDict(report_name)
-    return report["ram"].items()
-
 def getReportCpuInfos(report_name):
     report = openReportAsDict(report_name)
     # logger.info(report["cpu"].items())
     return report["cpu"].items()
-
-def getReportRamInfos(report_name):
-    report = openReportAsDict(report_name)
-    return report["ram"].items()
 
 def openReportAsStr(report_name):
     with open(path+"/"+report_name) as report:
