@@ -33,6 +33,23 @@ def getDateTimeReport(report_name):
     date_report = tz.localize(datetime.strptime(" ".join(report_name.split(".")[0].split("_")[len(report_name.split(".")[0].split("_"))-2:]), "%d-%m-%Y %H-%M-%S"))
     return date_report
 
+def getReportRamInfos(report_name):
+    report = openReportAsDict(report_name)
+    return report["ram"].items()
+
+def getReportRamInfos(report_name):
+    report = openReportAsDict(report_name)
+    return report["ram"].items()
+
+def getReportCpuInfos(report_name):
+    report = openReportAsDict(report_name)
+    # logger.info(report["cpu"].items())
+    return report["cpu"].items()
+
+def getReportRamInfos(report_name):
+    report = openReportAsDict(report_name)
+    return report["ram"].items()
+
 def openReportAsStr(report_name):
     with open(path+"/"+report_name) as report:
         return report.read()
@@ -50,11 +67,11 @@ def getLastReport():
         date1 = getDateTimeReport(report_name)
         if (date1 > date2):
             most_recent_report = report_name
-    logReport(most_recent_report)
+    # logReport(most_recent_report)
     return most_recent_report
 
 def main():
-    getLastReport()
+    getReportCpuInfos(getLastReport())
     
 if __name__ == "__main__":
     main()

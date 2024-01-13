@@ -54,8 +54,8 @@ def createReportAverage(hours):
     
 
 def main():
-    createReport(getCpuObject(),getRamObject(),getTcpObject(),False)
-    createReportAverage(1)
+    # createReport(getCpuObject(),getRamObject(),getTcpObject(),False)
+    createReportAverage(100)
 
 if __name__ == "__main__":
     main()
