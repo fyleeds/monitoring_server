@@ -10,13 +10,13 @@ from create_report import createReportAverage
 
 
     
-def main():
-    # logLastReport()
-    # logListReports()
-    createReportAverage(1)
-    # logLastReportAverage()
+# def main():
+#     # logLastReport()
+#     # logListReports()
+#     # createReportAverage(1)
+#     # logLastReportAverage()
     
     
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
