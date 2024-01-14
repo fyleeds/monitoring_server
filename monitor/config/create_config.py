@@ -7,7 +7,7 @@ from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger("config_create_logger")
 
-configs_path = "../etc/monit/"
+configs_path = "/etc/monit/"
 config_name = "monit_conf.json"
 config_path = configs_path + config_name
 

@@ -17,7 +17,7 @@ id_str = str(uuid.uuid4())
 date_str = datetime.now( pytz.timezone('Europe/Paris')).strftime("%d-%m-%Y_%H-%M-%S")
 
 report_name = "report_monit_average_"+ id_str +"_" + date_str + ".json"
-base_path = "../../var/monit"
+base_path = "/var/monit"
 reports_average_path = base_path + "/reports_average/"
 report_average_path = reports_average_path + report_name
 

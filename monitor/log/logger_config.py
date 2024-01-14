@@ -2,7 +2,7 @@ import logging
 import sys
 import os
 
-base_path = "../../var/log/monit/"
+base_path = "/var/log/monit/"
 
 
 class CustomFormatter(logging.Formatter):
