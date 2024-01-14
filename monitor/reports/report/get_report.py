@@ -13,6 +13,8 @@ date =  datetime.now(tz)
 
 def getReportRamInfos(path,report_name):
     with open(path+report_name) as report:
+        logger.info("Report path : %s",path+report_name)
+        logger.info("Report read : %s",report.read())
         return json.loads(report.read())["ram"].items()
 
 def getReportCpuInfos(path,report_name):
