@@ -23,7 +23,7 @@ def getStatusConnections():
 def checkConfig():
     config = getConfig(config_path)
     ports_dict = defaultdict(lambda: defaultdict(bool))
-    if config["ports"]["tcp"] != None:
+    if config["ports"].items != None:
         for type,port in config["ports"].items():
             port_str = str(port)
             if isinstance(getPortConnectionsValue,dict):
