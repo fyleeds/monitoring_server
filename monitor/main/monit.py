@@ -1,22 +1,28 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../report'))
+sys.path.append(os.path.abspath('../reports/report'))
+from log_report import logLastReport, logListReports
+from create_report import  report_path, reports_path, createReportFolder,createReport
 
-from log_report import logLastReport, logListReports, logLastReportAverage
-from create_report import createReportAverage, createReport
-# sys.path.append(os.path.abspath('../log'))
-# from logger_config import setup_logger
+sys.path.append(os.path.abspath('../reports/report_average'))
+from create_report_average import report_average_path,reports_average_path,createReportAverage
 
 
     
 def main():
 
-    createReport()
-    createReportAverage(1)
-    logLastReportAverage()
-    logLastReport()
-    logListReports()
+    createReportFolder(reports_path)
+    createReportFolder(reports_average_path)
+    
+    createReport(report_path)
+    createReportAverage(1,reports_path,report_average_path)
+    
+    logLastReport(reports_path)
+    logListReports(reports_path)
+    # logLastReport(reports_average_path)
+    # logListReports(reports_average_path)
+
     
     
 

@@ -4,7 +4,7 @@ import json
 def getListStorage(dir):
     return [file.name for file in os.scandir(dir)]
 
-def readFile(path):
+def getFile(path):
     with open(path) as report:
         return report.read()
     
