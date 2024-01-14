@@ -9,26 +9,21 @@ from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger("get_report_logger")
 
-path_reports = "../../var/monit/reports"
-path_reports_average = "../../var/monit/reports_average"
+# Ajouter le chemin vers log_folder à sys.path
+sys.path.append(os.path.abspath('../storage'))
+from get_storage import getListStorage
+
+base_path = "../../var/log/monit"
+path_reports = base_path + "/reports"
+path_reports_average = base_path + "/reports_average"
 
 tz= pytz.timezone('Europe/Paris')
 date =  datetime.now(tz)
 
-def logListReports():
-    logger.info([file.name for file in os.scandir(path_reports)])
-
-def getListReports():
-    list_reports = [file.name for file in os.scandir(path_reports)]
-    return list_reports
-
-def getListReportsAverage():
-    return [file.name for file in os.scandir(path_reports_average)]
-
 def getListReportsLastHours(hours):
     list_reports = []
     date_wanted = date - timedelta(hours=hours)
-    for report_name in getListReports():
+    for report_name in getListStorage(path_reports):
         if getDateTimeReport(report_name) > date_wanted:
             list_reports.append(report_name)
     return list_reports
@@ -43,7 +38,6 @@ def getReportRamInfos(report_name):
 
 def getReportCpuInfos(report_name):
     report = getReportAsDict(report_name)
-    # logger.info(report["cpu"].items())
     return report["cpu"].items()
 
 def getReportAsStr(report_name):
@@ -53,37 +47,22 @@ def getReportAsStr(report_name):
 def getReportAsDict(report_name):
     return json.loads(getReportAsStr(report_name))
 
-def logReport(report_name):
-    with open(path_reports+"/"+report_name) as report:
-        logger.info("Checking %s : %s",report_name,report.read())
-
-def logReportAverage(report_name):
-    with open(path_reports_average+"/"+report_name) as report:
-        logger.info("Checking %s : %s",report_name,report.read())
-
 def getLastReportName():
     date2 = datetime(1970,1,1,0,0,0,0,tzinfo=tz)
-    for report_name in getListReports():
+    for report_name in getListStorage(path_reports):
         date1 = getDateTimeReport(report_name)
         if (date1 > date2):
             most_recent_report = report_name
-    # logReport(most_recent_report)
     return most_recent_report
 
 def getLastReportAverageName():
     date2 = datetime(1970,1,1,0,0,0,0,tzinfo=tz)
-    for report_name in getListReportsAverage():
+    for report_name in getListStorage(path_reports_average):
         date1 = getDateTimeReport(report_name)
         if (date1 > date2):
             most_recent_report = report_name
-    # logReport(most_recent_report)
     return most_recent_report
 
-def logLastReport():
-    logReport(getLastReportName())
-    
-def logLastReportAverage():
-    logReportAverage(getLastReportAverageName())
 
 # def main():
 

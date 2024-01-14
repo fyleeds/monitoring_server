@@ -1,4 +1,4 @@
 import os
 
-def getListDir(dir):
+def getListStorage(dir):
     return [file.name for file in os.scandir(dir)]
