@@ -1,0 +1,9 @@
+[Unit]
+Description=Service de sauvegarde quotidienne
+
+[Service]
+ExecStart=/usr/local/bin/backup_script.sh
+
+[Install]
+WantedBy=multi-user.target
+

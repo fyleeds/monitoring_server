@@ -1,0 +1,11 @@
+#!/bin/bash
+# Nom du fichier : run_python_script.sh
+
+# Changez pour le répertoire contenant votre script Python
+cd /home/clem/monitoring_server/monitor/main
+
+# Exécutez le script Python
+python3 monit.py -check
+
+# Si vous avez besoin de passer des arguments au script Python, vous pouvez les ajouter après le nom du fichier
+# python3 nom_du_script_python.py arg1 arg2
