@@ -2,7 +2,7 @@ import logging
 import sys
 import os
 
-base_path = "../../var/log/monit"
+base_path = "../../var/log/monit/"
 
 # Ajouter le chemin vers log_folder à sys.path
 sys.path.append(os.path.abspath('../storage'))
@@ -35,7 +35,7 @@ def setup_logger(name):
 
         # Create handlers
         c_handler = logging.StreamHandler()
-        f_handler = logging.FileHandler(base_path + "/monit.log")
+        f_handler = logging.FileHandler(base_path + "monit.log")
         c_handler.setLevel(logging.DEBUG)  # Set to DEBUG to ensure all levels are logged to console
         f_handler.setLevel(logging.DEBUG)  # Set to DEBUG to ensure all levels are logged to file
 

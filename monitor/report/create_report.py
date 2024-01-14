@@ -8,7 +8,7 @@ from compute_report import getAverageReport
 
 # Ajouter le chemin vers log_folder à sys.path
 sys.path.append(os.path.abspath('../storage'))
-from create_folder import makeDirReports
+from create_folder import makeDir
 
 # Ajouter le chemin vers log_folder à sys.path
 sys.path.append(os.path.abspath('../measures'))
@@ -44,24 +44,16 @@ def createReportAverageName():
     return "report_average_"+ id_str +"_" + date_str + ".json"
 
 def createReport():
-    makeDirReports(path_reports)
-    reportpath = path_reports + "/" + createReportName()   
+    makeDir(path_reports)
+    reportpath = path_reports + createReportName()   
     with open(reportpath, 'w') as outfile:
         json.dump(createReportObject(getCpuObject(),getRamObject(),getTcpObject()), outfile)
     logger.info("Report file created at %s",reportpath)
 
 def createReportAverage(hours):
-    makeDirReports(path_reports_average)
-    reportpath = path_reports_average + "/" + createReportAverageName()   
+    makeDir(path_reports_average)
+    reportpath = path_reports_average + createReportAverageName()   
     cpu,ram,tcp= getAverageReport(hours)
     with open(reportpath, 'w') as outfile:
         json.dump(createReportObject(cpu,ram,tcp), outfile)
     logger.info("Average report file created at %s",reportpath)
-
-def main():
-    # makeDirReports()
-    createReport()
-    createReportAverage(1)
-    
-if __name__ == "__main__":
-    main()

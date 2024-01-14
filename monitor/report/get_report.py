@@ -13,9 +13,9 @@ logger = setup_logger("get_report_logger")
 sys.path.append(os.path.abspath('../storage'))
 from get_storage import getListStorage
 
-base_path = "../../var/log/monit"
-path_reports = base_path + "/reports"
-path_reports_average = base_path + "/reports_average"
+base_path = "../../var/monit"
+path_reports = base_path + "/reports/"
+path_reports_average = base_path + "/reports_average/"
 
 tz= pytz.timezone('Europe/Paris')
 date =  datetime.now(tz)
