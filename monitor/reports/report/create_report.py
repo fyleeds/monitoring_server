@@ -7,7 +7,7 @@ import pytz
 
 sys.path.append(os.path.abspath('../measures'))
 from CPU import getCpuObject
-# from DISK import getDisksObject
+from DISK import getDisksObject
 from RAM import getRamObject
 from TCP import getTcpObject
 
@@ -24,18 +24,21 @@ reports_path = base_path + "/reports/"
 report_path = reports_path + report_name
 
 
-def createReportObject(cpu,ram,tcp):
-
+def createReportObject(cpu,ram,tcp,disk):
+    if disk is None:
+        disk = {}
+    if tcp is None:
+        tcp = {}
     return {
         "id": id_str,
         "timestamp": date_str,
         "cpu": cpu,
         "ram": ram,
+        "disk": disk,
         "network": tcp,
     }
-    # "disk": getDisksObject()
 
 def createReport(path): 
     with open(path, 'w') as outfile:
-        json.dump(createReportObject(getCpuObject(),getRamObject(),getTcpObject()), outfile)
+        json.dump(createReportObject(getCpuObject(),getRamObject(),getTcpObject(),getDisksObject()), outfile)
     logger.info("Report file created at %s",path)
