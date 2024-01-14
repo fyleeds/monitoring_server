@@ -1,8 +1,6 @@
 import sys
 import os
 
-base_path = "../../etc/monit/"
-
 # Ajouter le chemin vers log_folder à sys.path
 sys.path.append(os.path.abspath('../storage'))
 from create_folder import makeDir,getListDir
@@ -12,8 +10,8 @@ from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger("config_logger")
 
-from get_config import base_path
 
+base_path = "../etc/monit/"
 config_name = "monit.conf"
 config_path = base_path + config_name
 

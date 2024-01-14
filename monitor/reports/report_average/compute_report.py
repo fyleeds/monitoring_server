@@ -5,7 +5,7 @@ from collections import defaultdict
 sys.path.append(os.path.abspath('../report'))
 from get_report import getListReportsLastHours,getReportRamInfos,getReportCpuInfos
 
-sys.path.append(os.path.abspath('../../log'))
+sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger("compute_report_logger")

@@ -9,7 +9,7 @@ from compute_report import getAverageReport
 sys.path.append(os.path.abspath('../report'))
 from create_report import createReportObject
 
-sys.path.append(os.path.abspath('../../log'))
+sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
 logger = setup_logger("create_report_average_logger")
 
