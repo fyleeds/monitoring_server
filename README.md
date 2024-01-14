@@ -40,7 +40,7 @@ python3 monit.py -check
 # Si vous avez besoin de passer des arguments au script Python, vous pouvez les ajouter après le nom du fichier
 # python3 monit.py arg1 arg2
 ```
-**VEUILLEZ CHANGER SVP LE CHEMIN PAR DEFAUT !**
+**VEUILLEZ CHANGER SVP LE CHEMIN PAR DEFAUT DANS LE SCRIPT !**
 ```
 sudo chmod +x /usr/local/bin/backup_script.sh
 ```
