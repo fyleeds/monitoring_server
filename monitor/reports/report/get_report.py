@@ -13,11 +13,11 @@ date =  datetime.now(tz)
 
 def getReportRamInfos(path,report_name):
     with open(path+report_name) as report:
-        return json.loads(report.read())(path+report_name)["ram"].items()
+        return json.loads(report.read())["ram"].items()
 
 def getReportCpuInfos(path,report_name):
     with open(path+report_name) as report:
-        return json.loads(report.read())(path+report_name)["cpu"].items()
+        return json.loads(report.read())["cpu"].items()
 
 def getLastReportName(path):
     date2 = datetime(1970,1,1,0,0,0,0,tzinfo=tz)

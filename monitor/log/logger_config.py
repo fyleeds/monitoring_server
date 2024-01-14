@@ -4,10 +4,6 @@ import os
 
 base_path = "../../var/log/monit/"
 
-# Ajouter le chemin vers log_folder à sys.path
-sys.path.append(os.path.abspath('../storage'))
-
-from create_folder import makeDir
 
 class CustomFormatter(logging.Formatter):
 
@@ -26,8 +22,8 @@ class CustomFormatter(logging.Formatter):
 
 def setup_logger(name):
     try:
-        
-        makeDir(base_path)
+        if not os.path.exists(base_path):
+            os.makedirs(base_path)
         
         # Create a custom logger
         logger = logging.getLogger(name)

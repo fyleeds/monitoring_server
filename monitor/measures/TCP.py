@@ -23,20 +23,20 @@ def getStatusConnections():
 def checkConfig():
     config = getConfig(config_path)
     ports_dict = defaultdict(lambda: defaultdict(bool))
-    if config["ports"]["tcp"] == []:
-        logger.error("No port specified in config file")
-        sys.exit(1)
-    else:
-        logger.info("Port specified in config file")
-        for port in config["ports"]["tcp"]:
+    if config["ports"]["tcp"] != None:
+        for type,port in config["ports"].items():
             port_str = str(port)
-            logger.info("Port %s",port)
-            if port in getPortConnectionsValue():
-                logger.info("Port %s is open",port)
-                ports_dict["ports"][port_str] = True
+            if isinstance(getPortConnectionsValue,dict):
+                for port_connected in getPortConnectionsValue():
+                    if port == port_connected:
+                        ports_dict[type][port_str] = True
+                    else:
+                        ports_dict[type][port_str] = False
             else:
-                logger.error("Port %s is not open",port)
-                ports_dict["ports"][port_str] = False
+                if port == getPortConnectionsValue():
+                        ports_dict[type][port_str] = True
+                else:
+                    ports_dict[type][port_str] = False    
     return ports_dict
 
 def getPortConnectionsValue():

@@ -12,7 +12,7 @@ def logReport(report_path):
         logger.info("Checking : %s",report.read())
 
 def logListReports(path):
-    logger.info([file.name for file in os.scandir(dir)])
+    logger.info([file.name for file in os.scandir(path)])
 
 def logLastReport(path):
     logReport(path + getLastReportName(path))
