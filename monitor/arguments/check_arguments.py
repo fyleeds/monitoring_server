@@ -15,6 +15,5 @@ def checkAvg(args):
         logger.error("No argument given.")
         sys.exit(1)
     elif args.get_avg > 0:
-        logger.info("The average time (-get_avg) is %s",args.get_avg)
         return True
     return False
