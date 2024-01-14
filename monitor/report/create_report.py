@@ -5,6 +5,12 @@ import uuid
 from datetime import datetime
 import pytz
 from compute_report import getAverageReport
+
+# Ajouter le chemin vers log_folder à sys.path
+sys.path.append(os.path.abspath('../storage'))
+
+from create_folder import makeDirReports
+
 # Ajouter le chemin vers log_folder à sys.path
 sys.path.append(os.path.abspath('../measures'))
 
@@ -23,26 +29,6 @@ date_str = datetime.now( pytz.timezone('Europe/Paris')).strftime("%d-%m-%Y_%H-%M
 
 base_path = "../../var/monit/"
 
-def getListDir(dir):
-    return [file.name for file in os.scandir(dir)]
-
-def isDirMonitExist(dir):
-    if not os.path.exists(dir):
-        logger.info("Directory %s does not exist",dir)
-        return False
-    else:
-        logger.info("Directory %s exists",dir)
-        return True
-
-def makeDirReports():
-    if not isDirMonitExist(base_path):
-       os.makedirs(base_path+"reports_average")
-       os.makedirs(base_path+"reports")
-    elif not isDirMonitExist(base_path + "reports_average"):
-       os.makedirs(base_path+"reports_average")
-    elif not isDirMonitExist(base_path + "reports"):
-       os.makedirs(base_path+"reports")
-
 def createReportObject(cpu,ram,tcp):
 
     return {
@@ -55,7 +41,7 @@ def createReportObject(cpu,ram,tcp):
     # "disk": getDisksObject()
 
 def createReport():
-    makeDirReports()
+    makeDirReports(base_path)
     reportname = "report_"+ id_str +"_" + date_str + ".json"
     reportpath = base_path + "reports/" + reportname   
     with open(reportpath, 'w') as outfile:
@@ -63,7 +49,7 @@ def createReport():
     logger.info("Report file created at %s",reportpath)
 
 def createReportAverage(hours):
-    makeDirReports()
+    makeDirReports(base_path)
     reportname = "report_average_" + id_str +"_" + date_str + ".json"
     reportpath = base_path + "reports_average/" + reportname
     cpu,ram,tcp= getAverageReport(hours)

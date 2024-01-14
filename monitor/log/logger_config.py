@@ -1,5 +1,13 @@
 import logging
 import sys
+import os
+
+base_path = "../../var/log/monit"
+
+# Ajouter le chemin vers log_folder à sys.path
+sys.path.append(os.path.abspath('../storage'))
+
+from create_folder import makeDir
 
 class CustomFormatter(logging.Formatter):
 
@@ -18,13 +26,16 @@ class CustomFormatter(logging.Formatter):
 
 def setup_logger(name):
     try:
+        
+        makeDir(base_path)
+        
         # Create a custom logger
         logger = logging.getLogger(name)
         logger.setLevel(logging.DEBUG)  # This needs to be DEBUG to capture all levels of logs
 
         # Create handlers
         c_handler = logging.StreamHandler()
-        f_handler = logging.FileHandler('../../var/log/monit_log')
+        f_handler = logging.FileHandler(base_path + "/monit.log")
         c_handler.setLevel(logging.DEBUG)  # Set to DEBUG to ensure all levels are logged to console
         f_handler.setLevel(logging.DEBUG)  # Set to DEBUG to ensure all levels are logged to file
 
