@@ -90,6 +90,7 @@ sudo systemctl start backup.timer
 sudo systemctl status backup.timer
 
 ```
+**SI ACTIF ALORS OK !**
 
 ### Permission user
 ```
@@ -112,7 +113,7 @@ sudo chown -R user:user /var/monit/
 sudo chown -R user:user /etc/monit/
 
 ```
-**SI ACTIF ALORS OK !**
+
 ## Usage
 
 Pour utiliser Monitoring_Server, vous pouvez commencer par afficher l'aide :
