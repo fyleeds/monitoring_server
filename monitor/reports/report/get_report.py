@@ -12,10 +12,25 @@ tz= pytz.timezone('Europe/Paris')
 date =  datetime.now(tz)
 
 def getReportRamInfos(path,report_name):
-    with open(path+report_name) as report:
-        logger.info("Report path : %s",path+report_name)
-        logger.info("Report read : %s",report.read())
-        return json.loads(report.read())["ram"].items()
+    try:
+        with open(f"{path}/{report_name}", "r") as report:
+            report_content = report.read()
+            # Check if the report content is empty or not
+            if not report_content:
+                raise ValueError("Report file is empty")
+
+            # Parse the JSON content
+            report_data = json.loads(report_content)
+            return report_data["ram"].items()
+    except json.JSONDecodeError as e:
+        # Handle JSON decode error
+        print(f"Error parsing JSON from the report: {e}")
+    except ValueError as e:
+        # Handle other value errors, like empty file
+        print(e)
+    except Exception as e:
+        # Handle any other exceptions
+        print(f"An unexpected error occurred: {e}")
 
 def getReportCpuInfos(path,report_name):
     with open(path+report_name) as report:
