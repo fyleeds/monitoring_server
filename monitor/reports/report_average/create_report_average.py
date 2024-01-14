@@ -24,5 +24,5 @@ report_average_path = reports_average_path + report_name
 def createReportAverage(hours,reports_path,report_average_path):
     cpu,ram,tcp= getAverageReport(hours,reports_path)
     with open(report_average_path, 'w') as outfile:
-        json.dump(createReportObject(cpu,ram,tcp,None), outfile)
+        json.dump(createReportObject(cpu,ram,tcp,{}), outfile)
     logger.info("Average report file created at %s",report_average_path)

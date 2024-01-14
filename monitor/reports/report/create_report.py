@@ -25,8 +25,6 @@ report_path = reports_path + report_name
 
 
 def createReportObject(cpu,ram,tcp,disk):
-    if disk is None:
-        disk = {}
     if tcp is None:
         tcp = {}
     return {
