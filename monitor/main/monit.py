@@ -23,7 +23,6 @@ from check_arguments import checkAvg
 
 parser = argparse.ArgumentParser()
 
-
 def main():
     paths = [reports_path,reports_average_path,configs_path]
     for path in paths:
@@ -36,14 +35,11 @@ def main():
         createReport(report_path)
     elif args.list:
         logListReports(reports_path)
-        logger.info("List of reports sended")
     elif args.last :
         logLastReport(reports_path)
-        logger.info("Last report sended")
     elif checkAvg(args):
         createReportAverage(args.get_avg,reports_path,report_average_path)
         logLastReport(reports_average_path)
-        logger.info("Report average for %s hours created at %s",args.get_avg,report_average_path)
     
 if __name__ == "__main__":
     main()

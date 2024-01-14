@@ -39,4 +39,3 @@ def createReportObject(cpu,ram,tcp,disk):
 def createReport(path): 
     with open(path, 'w') as outfile:
         json.dump(createReportObject(getCpuObject(),getRamObject(),getTcpObject(),getDisksObject()), outfile)
-    logger.info("Report file created at %s",path)

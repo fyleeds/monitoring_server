@@ -13,6 +13,8 @@ def logReport(report_path):
 
 def logListReports(path):
     logger.info([file.name for file in os.scandir(path)])
+    logger.info("List of reports sended")
 
 def logLastReport(path):
     logReport(path + getLastReportName(path))
+    logger.info("Last report sended")
