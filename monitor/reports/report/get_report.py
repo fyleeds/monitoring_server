@@ -24,13 +24,13 @@ def getReportRamInfos(path,report_name):
             return report_data["ram"].items()
     except json.JSONDecodeError as e:
         # Handle JSON decode error
-        print(f"Error parsing JSON from the report: {e}")
+        logger.error(f"Error parsing JSON from the report: {e}")
     except ValueError as e:
         # Handle other value errors, like empty file
-        print(e)
+        logger.error(e)
     except Exception as e:
         # Handle any other exceptions
-        print(f"An unexpected error occurred: {e}")
+        logger.error(f"An unexpected error occurred: {e}")
 
 def getReportCpuInfos(path,report_name):
     with open(path+report_name) as report:
