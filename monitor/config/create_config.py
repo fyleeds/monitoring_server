@@ -1,24 +1,17 @@
 import sys
 import os
-
-# Ajouter le chemin vers log_folder à sys.path
-sys.path.append(os.path.abspath('../storage'))
-from create_folder import makeDir,getListDir
+import json
 
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
 # Créer une instance de logger pour ce fichier
 logger = setup_logger("config_logger")
 
+configs_path = "../etc/monit/"
+config_name = "monit_conf.json"
+config_path = configs_path + config_name
 
-base_path = "../etc/monit/"
-config_name = "monit.conf"
-config_path = base_path + config_name
-
-def createConfigFolder():
-    makeDir(base_path)
-    
-def createReport():
-    with open(config_path, 'w') as outfile:
-        json.dump(createReportObject(getCpuObject(),getRamObject(),getTcpObject()), outfile)
-    logger.info("Report file created at %s",reportpath)
+def createConfig(path):
+    with open(path, 'w') as outfile:
+        json.dump("{'ports' : {'tcp' : 37901 }",outfile)
+    logger.info("Config file created at %s",path)
