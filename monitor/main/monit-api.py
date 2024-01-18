@@ -9,7 +9,7 @@ from create_report import  report_path, reports_path
 
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
-logger = setup_logger("create_report_logger")
+logger = setup_logger("create_api_logger")
 # on crée un ptit objet Flask, nécessaire pour ajouter des routes
 app = Flask(__name__)
 app.secret_key = b'SECRET_KEY'
@@ -39,6 +39,7 @@ def get_reportById(input_report_id=None):
             report_id = getReportId(report_name)
             if report_id == input_report_id:
                 report_name_found = report_name
+                break        
         if report_name_found is not None:
             file = open(report_path + report_name_found)
             report = json.load(file)
