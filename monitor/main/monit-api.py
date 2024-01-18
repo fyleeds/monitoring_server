@@ -27,7 +27,7 @@ def get_reports():
         logger.info("filepath : %s", reports_path + file.name)
         file = open(reports_path + file.name)
         if file is not None:
-            report = json.load(file.read())
+            report = json.load(file)
             reports.append(report)
         file.close()
         
