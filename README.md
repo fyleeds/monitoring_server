@@ -60,7 +60,7 @@ ExecStart=/usr/local/bin/backup_monit.sh
 [Install]
 WantedBy=multi-user.target
 ```
-### Créer le service monit_api.sh
+### Créer le service monit_api.service
 ```
 [Unit]
 Description= API_Monitoring
