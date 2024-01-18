@@ -47,6 +47,13 @@ def getLastReportName(path):
 
 def getDateTimeReport(report_name):
     return tz.localize(datetime.strptime(" ".join(report_name.split(".")[0].split("_")[len(report_name.split(".")[0].split("_"))-2:]), "%d-%m-%Y %H-%M-%S"))
+def getReportId(report_name):
+    return report_name.split(".")[0].split("_")[2]
+def getReportsId(path):
+    reports_id = []
+    for report_name in [file.name for file in os.scandir(path)]:
+        reports_id.append(getReportId(report_name))
+    return reports_id
 
 def getListReportsLastHours(hours,path):
     list_reports = []
