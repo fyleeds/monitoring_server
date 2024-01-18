@@ -16,17 +16,20 @@ def getConnections():
     return psutil.net_connections(kind='tcp')
 
 def getStatusConnections():
-    for connection in getConnections():
-        if connection.status == psutil.CONN_ESTABLISHED:
-            return connection.laddr
+    if getConnections() is not None:
+        for connection in getConnections():
+            if connection.status == psutil.CONN_ESTABLISHED:
+                return connection.laddr
+    else:
+        return None
         
 def checkConfig():
     config = getConfig(config_path)
     ports_dict = defaultdict(lambda: defaultdict(bool))
-    if config is not None and "ports" in config and config["ports"] is not None:
+    if config is not None and "ports" in config and config["ports"] is not None and getPortConnectionsValue() is not None :
         for type,port in config["ports"].items():
             port_str = str(port)
-            if isinstance(getPortConnectionsValue,dict):
+            if isinstance(getPortConnectionsValue,dict) :
                 for port_connected in getPortConnectionsValue():
                     if port == port_connected:
                         ports_dict[type][port_str] = True
@@ -37,10 +40,13 @@ def checkConfig():
                         ports_dict[type][port_str] = True
                 else:
                     ports_dict[type][port_str] = False    
-    return ports_dict
+        return ports_dict
 
 def getPortConnectionsValue():
-    return getStatusConnections().port
+    if getStatusConnections() is not None:
+        return getStatusConnections().port
+    else:
+        return None
 
 def getTcpObject():
     return checkConfig()
