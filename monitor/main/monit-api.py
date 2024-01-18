@@ -25,7 +25,7 @@ def get_reports():
     reports = []
     for file in os.scandir(reports_path):
         if file is not None:
-            report = json.load(file)
+            report = json.load(file.read())
             reports.append(report)
         file.close()
         
