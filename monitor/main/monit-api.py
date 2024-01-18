@@ -50,4 +50,4 @@ def get_reportById(input_report_id=None):
         abort(404)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='37.44.247.226', port=80, debug=True)
