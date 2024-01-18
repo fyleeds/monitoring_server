@@ -24,9 +24,10 @@ def get_reports():
     logger.info("access reports API")
     reports = []
     for file in os.scandir(reports_path):
+        logger.info("filepath : %s", reports_path + file.name)
         file = open(reports_path + file.name)
         if file is not None:
-            report = json.load(file)
+            report = json.load(file.read())
             reports.append(report)
         file.close()
         
