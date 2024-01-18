@@ -5,7 +5,7 @@ import sys
 sys.path.append(os.path.abspath('../reports/report'))
 # from log_report import logLastReport, logListReports
 from get_report import  getReportId
-from create_report import  report_path, reports_path
+from create_report import reports_path
 
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
@@ -21,16 +21,18 @@ app.secret_key = b'SECRET_KEY'
 # c'est dans la doc de Flask, nous on obéit :D
 @app.route('/reports', methods=['GET'])
 def get_reports():
-    logger.info("access reports")
-    reports_id = []
-    for report_name in [file.name for file in os.scandir(reports_path)]:
-        report_id = getReportId(report_name)
-        reports_id.append( {
-            "id": report_id,
-        })
-    if reports_id is not None:
-        logger.info("List of reports id sended to API :  %s", reports_id)
-        return jsonify(reports_id)
+    logger.info("access reports API")
+    reports = []
+    for file in os.scandir(reports_path):
+        file.open()
+        if file is not None:
+            report = json.load(file)
+            reports.append(report)
+        file.close()
+        
+    if reports is not None:
+        logger.info("List of reports id sended to API :  %s", reports)
+        return jsonify(reports)
     else:
         abort(404)
 
@@ -46,7 +48,7 @@ def get_reportById(input_report_id=None):
                 report_name_found = report_name
                 break        
         if report_name_found is not None:
-            file = open(report_path + report_name_found)
+            file = open(reports_path + report_name_found)
             report = json.load(file)
             file.close()
         else:
