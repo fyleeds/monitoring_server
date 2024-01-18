@@ -60,6 +60,23 @@ ExecStart=/usr/local/bin/backup_monit.sh
 [Install]
 WantedBy=multi-user.target
 ```
+### Créer le service monit_api.sh
+```
+[Unit]
+Description= API_Monitoring
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+User = clem
+Group = clem
+ExecStart=/usr/local/bin/monit_api.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
 ### Créer le timer
 ```
 
