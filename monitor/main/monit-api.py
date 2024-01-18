@@ -6,6 +6,10 @@ sys.path.append(os.path.abspath('../reports/report'))
 # from log_report import logLastReport, logListReports
 from get_report import  getReportId
 from create_report import  report_path, reports_path
+
+sys.path.append(os.path.abspath('../log'))
+from logger_config import setup_logger
+logger = setup_logger("create_report_logger")
 # on crée un ptit objet Flask, nécessaire pour ajouter des routes
 app = Flask(__name__)
 app.secret_key = b'SECRET_KEY'
@@ -22,6 +26,7 @@ def get_reports():
             "id": report_id,
         })
     if reports_id is not None:
+        logger.info("List of reports id sended to API :  %s", reports_id)
         return jsonify(reports_id)
     else:
         abort(404)
@@ -42,6 +47,7 @@ def get_reportById(input_report_id=None):
             abort(404)
 
         if report is not None:
+            logger.info("report %s sent to API :  %s", input_report_id, report)
             return jsonify(report)
         else:
             # la ptite 404 clean quand on demande une ressource qui n'existe pas
@@ -50,4 +56,4 @@ def get_reportById(input_report_id=None):
         abort(404)
 
 if __name__ == '__main__':
-    app.run(host='37.44.247.226', port=80, debug=True)
+    app.run(host='127.0.0.1', port=80, debug=True)
