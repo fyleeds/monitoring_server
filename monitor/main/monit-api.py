@@ -21,10 +21,8 @@ app.secret_key = b'SECRET_KEY'
 # c'est dans la doc de Flask, nous on obéit :D
 @app.route('/reports', methods=['GET'])
 def get_reports():
-    logger.info("access reports API")
     reports = []
     for file in os.scandir(reports_path):
-        logger.info("filepath : %s", reports_path + file.name)
         file = open(reports_path + file.name)
         if file is not None:
             report = json.load(file)
@@ -32,7 +30,6 @@ def get_reports():
         file.close()
         
     if reports is not None:
-        logger.info("List of reports id sended to API :  %s", reports)
         return jsonify(reports)
     else:
         abort(404)
@@ -67,7 +64,7 @@ def get_reportById(input_report_id=None):
 if __name__ == '__main__':
     logger.info("API started")
     try:
-        app.run(host='127.0.0.1', port=80, debug=True)
+        app.run(host='0.0.0.0', port=80)
     except Exception as e:
         logger.error("Error while starting API : %s", e)
     logger.info("API stopped")
