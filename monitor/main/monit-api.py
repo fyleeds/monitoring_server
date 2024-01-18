@@ -64,7 +64,7 @@ def get_reportById(input_report_id=None):
 if __name__ == '__main__':
     logger.info("API started")
     try:
-        app.run(host='37.44.247.226', port=1337)
+        app.run(host='37.44.247.226', port=80)
     except Exception as e:
         logger.error("Error while starting API : %s", e)
     logger.info("API stopped")
