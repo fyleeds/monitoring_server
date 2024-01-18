@@ -10,6 +10,8 @@ from create_report import  report_path, reports_path
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
 logger = setup_logger("create_api_logger")
+
+
 # on crée un ptit objet Flask, nécessaire pour ajouter des routes
 app = Flask(__name__)
 app.secret_key = b'SECRET_KEY'
@@ -57,4 +59,4 @@ def get_reportById(input_report_id=None):
         abort(404)
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=80, debug=True)
+    app.run(host='37.44.247.226', port=80, debug=True)
