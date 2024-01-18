@@ -1,7 +1,7 @@
 from flask import Flask, abort, jsonify
 import json
 import os
-
+import sys
 sys.path.append(os.path.abspath('../reports/report'))
 # from log_report import logLastReport, logListReports
 from get_report import  getReportId
