@@ -25,7 +25,7 @@ cd monitor/main
 ### Créer le script backup_monit.sh
 
 ```
-nano /usr/local/bin/backup_script.sh
+nano /usr/local/bin/backup_monit.sh
 ```
 
 ```
@@ -42,7 +42,7 @@ python3 monit.py -check
 ```
 **VEUILLEZ CHANGER SVP LE CHEMIN PAR DEFAUT DANS LE SCRIPT !**
 ```
-sudo chmod +x /usr/local/bin/backup_script.sh
+sudo chmod +x /usr/local/bin/backup_monit.sh
 ```
 ### Créer le Service backup.service
 ```
@@ -55,7 +55,7 @@ sudo nano /etc/systemd/system/backup.service
 Description=Service de sauvegarde quotidienne
 
 [Service]
-ExecStart=/usr/local/bin/backup_script.sh
+ExecStart=/usr/local/bin/backup_monit.sh
 
 [Install]
 WantedBy=multi-user.target
@@ -95,7 +95,7 @@ sudo systemctl status backup.timer
 ### Permission user
 ```
 
-sudo chown user:user /usr/local/bin/backup_script.sh
+sudo chown user:user /usr/local/bin/backup_monit.sh
 
 ```
 ```
