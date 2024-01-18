@@ -5,7 +5,7 @@ import sys
 sys.path.append(os.path.abspath('../reports/report'))
 # from log_report import logLastReport, logListReports
 from get_report import  getReportId
-from create_report import reports_path
+from create_report import  reports_path
 
 sys.path.append(os.path.abspath('../log'))
 from logger_config import setup_logger
@@ -24,8 +24,9 @@ def get_reports():
     logger.info("access reports API")
     reports = []
     for file in os.scandir(reports_path):
+        file = open(reports_path + file.name)
         if file is not None:
-            report = json.load(file.read())
+            report = json.load(file)
             reports.append(report)
         file.close()
         
