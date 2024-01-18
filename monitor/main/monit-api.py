@@ -21,6 +21,7 @@ app.secret_key = b'SECRET_KEY'
 # c'est dans la doc de Flask, nous on obéit :D
 @app.route('/reports', methods=['GET'])
 def get_reports():
+    logger.info("access reports")
     reports_id = []
     for report_name in [file.name for file in os.scandir(reports_path)]:
         report_id = getReportId(report_name)
@@ -36,6 +37,8 @@ def get_reports():
 
 @app.route('/reports/<input_report_id>', methods=['GET'])
 def get_reportById(input_report_id=None):
+    logger.info("access report by id")
+    logger.info("init report id : %s", input_report_id)
     if input_report_id is not None:
         for report_name in [file.name for file in os.scandir(reports_path)]:
             report_id = getReportId(report_name)
@@ -59,4 +62,6 @@ def get_reportById(input_report_id=None):
         abort(404)
 
 if __name__ == '__main__':
-    app.run(host='37.44.247.226', port=80, debug=True)
+    logger.info("API started")
+    app.run(host='127.0.0.1', port=80, debug=True)
+    logger.info("API stopped")
