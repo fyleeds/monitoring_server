@@ -12,9 +12,19 @@ from logger_config import setup_logger
 logger = setup_logger("create_api_logger")
 
 
+
 # on crée un ptit objet Flask, nécessaire pour ajouter des routes
 app = Flask(__name__)
 app.secret_key = b'SECRET_KEY'
+
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.yaml'  # Location of your swagger file
+SWAGGER_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={'app_name': "Monit API"}
+)
+app.register_blueprint(SWAGGER_BLUEPRINT, url_prefix=SWAGGER_URL)
 
 # utilisation d'un décorateur Python avec @ pour donc décorer une fonction
 # c'est l'ajout de ce décorateur qui permet d'ajouter une route
@@ -37,8 +47,6 @@ def get_reports():
 
 @app.route('/reports/<input_report_id>', methods=['GET'])
 def get_reportById(input_report_id=None):
-    logger.info("access report by id")
-    logger.info("init report id : %s", input_report_id)
     if input_report_id is not None:
         for report_name in [file.name for file in os.scandir(reports_path)]:
             report_id = getReportId(report_name)
