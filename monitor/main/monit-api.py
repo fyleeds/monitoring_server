@@ -17,14 +17,14 @@ logger = setup_logger("create_api_logger")
 app = Flask(__name__)
 app.secret_key = b'SECRET_KEY'
 
-SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.yaml'  # Location of your swagger file
-SWAGGER_BLUEPRINT = get_swaggerui_blueprint(
-    SWAGGER_URL,
-    API_URL,
-    config={'app_name': "Monit API"}
-)
-app.register_blueprint(SWAGGER_BLUEPRINT, url_prefix=SWAGGER_URL)
+# SWAGGER_URL = '/swagger'
+# API_URL = '/static/swagger.yaml'  # Location of your swagger file
+# SWAGGER_BLUEPRINT = get_swaggerui_blueprint(
+#     SWAGGER_URL,
+#     API_URL,
+#     config={'app_name': "Monit API"}
+# )
+# app.register_blueprint(SWAGGER_BLUEPRINT, url_prefix=SWAGGER_URL)
 
 # utilisation d'un décorateur Python avec @ pour donc décorer une fonction
 # c'est l'ajout de ce décorateur qui permet d'ajouter une route
