@@ -31,14 +31,13 @@ app.register_blueprint(SWAGGER_BLUEPRINT, url_prefix=SWAGGER_URL)
 # c'est dans la doc de Flask, nous on obéit :D
 @app.route('/reports', methods=['GET'])
 def get_reports():
-    reports = []
+    reports = {}
     for file in os.scandir(reports_path):
         file = open(reports_path + file.name)
         if file is not None:
-            report = json.load(file)
-            reports.append(report)
+            report= json.load(file)
+            reports[getReportId(file.name)] = report
         file.close()
-        
     if reports is not None:
         return jsonify(reports)
     else:
