@@ -41,6 +41,7 @@ def get_reports():
             keys.append(getReportId(file.name))
         file.close()
         reports = dict(zip(keys, values))
+        logger.info("reports sent to API :  %s", reports)
     if reports is not None:
         return jsonify(reports)
     else:
