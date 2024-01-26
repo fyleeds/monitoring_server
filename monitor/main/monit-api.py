@@ -4,7 +4,7 @@ import os
 import sys
 sys.path.append(os.path.abspath('../reports/report'))
 # from log_report import logLastReport, logListReports
-from get_report import  getReportId
+from get_report import  getReportId, getLastReportName
 from create_report import  reports_path
 
 sys.path.append(os.path.abspath('../log'))
@@ -46,6 +46,21 @@ def get_reports():
     else:
         abort(404)
 
+@app.route('/last', methods=['GET'])
+def get_last_report():
+    report_name_found = getLastReportName(reports_path)
+    if report_name_found is not None:
+            file = open(reports_path + report_name_found)
+            report = json.load(file)
+            file.close()
+    else:
+        abort(404)
+    if report is not None:
+        return jsonify(report)
+    else:
+        abort(404)
+
+
 @app.route('/')
 def index():
     return redirect('/reports')
@@ -73,6 +88,10 @@ def get_reportById(input_report_id=None):
             abort(404)
     else:
         abort(404)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return jsonify(error=404, text=str(e)), 404
 
 if __name__ == '__main__':
     logger.info("API started")
