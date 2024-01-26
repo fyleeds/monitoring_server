@@ -1,4 +1,4 @@
-from flask import Flask, abort, jsonify
+from flask import Flask, abort, jsonify, redirect
 import json
 import os
 import sys
@@ -41,12 +41,14 @@ def get_reports():
             keys.append(getReportId(file.name))
         file.close()
         reports = dict(zip(keys, values))
-        logger.info("reports sent to API :  %s", reports)
     if reports is not None:
         return jsonify(reports)
     else:
         abort(404)
 
+@app.route('/')
+def index():
+    return redirect('/reports')
 
 @app.route('/reports/<input_report_id>', methods=['GET'])
 def get_reportById(input_report_id=None):
