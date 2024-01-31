@@ -180,6 +180,18 @@ python3 monit.py -check
 [user@user main]$ python3 monit.py -check
 Report file created at /var/monit/reports/report_monit_e7632170-b512-4120-8ff0-682346acc531_14-01-2024_23-48-40.json
 ```
+
+
+### Exemple d'Utilisation API
+
+Voici un exemple simple de lancement d'API :
+
+```bash
+python3 monit-api.py
+```
+
+Ensuite allez sur le lien suivant : http://localhost:5000
+
 ## Configuration
 
 *Monitoring_Server* peut être configuré en modifiant le fichier `monit_conf.json` dans le dossier `/etc/monit/monit_conf.json`. Voici un exemple de ce que vous pouvez y mettre **(ATTENTION PORTS TCP SEULEMENT)**:
