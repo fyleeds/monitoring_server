@@ -3,6 +3,7 @@
 
 Le service de monitoring de serveur surveille et analyse toutes les 24 heures l'état et les performances d'un serveur. Il vérifie divers paramètres tels que l'utilisation du CPU, de la mémoire, de l'espace disque, les performances du réseau, ainsi que la disponibilité et l'état des ports TCP ouverts par des applications et services exécutés sur le serveur. Cela aide à maintenir une performance optimale et à assurer la disponibilité des services et des applications hébergés sur le serveur.
 
+![Monitor_main_meme](./monitors.jpg)
 ## Installation
 
 Avant d'installer Monitoring_Server, assurez-vous d'avoir les prérequis suivants :
